@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: contract.proto
 
-package _go
+package tracer
 
 import (
 	context "context"
@@ -24,7 +24,6 @@ const _ = grpc.SupportPackageIsVersion7
 type HelloWorldClient interface {
 	CreateAlbum(ctx context.Context, in *CreateAlbumRequest, opts ...grpc.CallOption) (*CreateAlbumResponse, error)
 	GetAlbum(ctx context.Context, in *GetAlbumRequest, opts ...grpc.CallOption) (*GetAlbumResponse, error)
-	GetAlbumById(ctx context.Context, in *GetAlbumByIdRequest, opts ...grpc.CallOption) (*GetAlbumByIdResponse, error)
 }
 
 type helloWorldClient struct {
@@ -37,7 +36,7 @@ func NewHelloWorldClient(cc grpc.ClientConnInterface) HelloWorldClient {
 
 func (c *helloWorldClient) CreateAlbum(ctx context.Context, in *CreateAlbumRequest, opts ...grpc.CallOption) (*CreateAlbumResponse, error) {
 	out := new(CreateAlbumResponse)
-	err := c.cc.Invoke(ctx, "/hello.world.v1.HelloWorld/CreateAlbum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/tracer.HelloWorld/CreateAlbum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,16 +45,7 @@ func (c *helloWorldClient) CreateAlbum(ctx context.Context, in *CreateAlbumReque
 
 func (c *helloWorldClient) GetAlbum(ctx context.Context, in *GetAlbumRequest, opts ...grpc.CallOption) (*GetAlbumResponse, error) {
 	out := new(GetAlbumResponse)
-	err := c.cc.Invoke(ctx, "/hello.world.v1.HelloWorld/GetAlbum", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *helloWorldClient) GetAlbumById(ctx context.Context, in *GetAlbumByIdRequest, opts ...grpc.CallOption) (*GetAlbumByIdResponse, error) {
-	out := new(GetAlbumByIdResponse)
-	err := c.cc.Invoke(ctx, "/hello.world.v1.HelloWorld/GetAlbumById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/tracer.HelloWorld/GetAlbum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +58,6 @@ func (c *helloWorldClient) GetAlbumById(ctx context.Context, in *GetAlbumByIdReq
 type HelloWorldServer interface {
 	CreateAlbum(context.Context, *CreateAlbumRequest) (*CreateAlbumResponse, error)
 	GetAlbum(context.Context, *GetAlbumRequest) (*GetAlbumResponse, error)
-	GetAlbumById(context.Context, *GetAlbumByIdRequest) (*GetAlbumByIdResponse, error)
 	mustEmbedUnimplementedHelloWorldServer()
 }
 
@@ -81,9 +70,6 @@ func (UnimplementedHelloWorldServer) CreateAlbum(context.Context, *CreateAlbumRe
 }
 func (UnimplementedHelloWorldServer) GetAlbum(context.Context, *GetAlbumRequest) (*GetAlbumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlbum not implemented")
-}
-func (UnimplementedHelloWorldServer) GetAlbumById(context.Context, *GetAlbumByIdRequest) (*GetAlbumByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAlbumById not implemented")
 }
 func (UnimplementedHelloWorldServer) mustEmbedUnimplementedHelloWorldServer() {}
 
@@ -108,7 +94,7 @@ func _HelloWorld_CreateAlbum_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hello.world.v1.HelloWorld/CreateAlbum",
+		FullMethod: "/tracer.HelloWorld/CreateAlbum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HelloWorldServer).CreateAlbum(ctx, req.(*CreateAlbumRequest))
@@ -126,28 +112,10 @@ func _HelloWorld_GetAlbum_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/hello.world.v1.HelloWorld/GetAlbum",
+		FullMethod: "/tracer.HelloWorld/GetAlbum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HelloWorldServer).GetAlbum(ctx, req.(*GetAlbumRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HelloWorld_GetAlbumById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAlbumByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HelloWorldServer).GetAlbumById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/hello.world.v1.HelloWorld/GetAlbumById",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HelloWorldServer).GetAlbumById(ctx, req.(*GetAlbumByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -156,7 +124,7 @@ func _HelloWorld_GetAlbumById_Handler(srv interface{}, ctx context.Context, dec 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HelloWorld_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hello.world.v1.HelloWorld",
+	ServiceName: "tracer.HelloWorld",
 	HandlerType: (*HelloWorldServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -166,10 +134,6 @@ var HelloWorld_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAlbum",
 			Handler:    _HelloWorld_GetAlbum_Handler,
-		},
-		{
-			MethodName: "GetAlbumById",
-			Handler:    _HelloWorld_GetAlbumById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

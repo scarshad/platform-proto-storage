@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package tracer;
+
+option go_package = "../pb/go;tracer";
+
+message Album {
+  string id = 1;
+  string title = 2;
+  string artist = 3;
+  float price = 4;
+}
+
+message CreateAlbumRequest {
+  Album album = 1;
+}
+message CreateAlbumResponse {
+  Album Album = 1;
+}
+
+message GetAlbumRequest {}
+message GetAlbumResponse {
+  repeated Album album = 1;
+}
+
+service HelloWorld {
+  rpc CreateAlbum(CreateAlbumRequest) returns (CreateAlbumResponse) {}
+  rpc GetAlbum(GetAlbumRequest) returns (GetAlbumResponse) {}
+}
