@@ -1,4 +1,4 @@
-module platform-proto-storage
+module github.com/scarshad/platform-proto-storage
 
 go 1.19
 
