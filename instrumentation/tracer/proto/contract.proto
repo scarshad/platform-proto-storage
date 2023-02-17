@@ -4,8 +4,8 @@ package tracer;
 
 option go_package = "../pb/go;tracer";
 
-enum testenum {
-  test_field = 0;
+enum TestEnum {
+  TEST_FIELD = 0;
 }
 
 message Album {
