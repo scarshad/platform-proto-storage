@@ -4,9 +4,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout source
       - uses: actions/checkout@v2
-
 #      - name: run protolint
 #        uses: plexsystems/protolint-action@v0.4.0
 #        with:
