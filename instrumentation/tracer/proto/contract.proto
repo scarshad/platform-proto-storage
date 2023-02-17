@@ -15,15 +15,16 @@ message CreateAlbumRequest {
   Album album = 1;
 }
 message CreateAlbumResponse {
-  Album Album = 1;
+  Album album = 1;
 }
 
-message GetAlbumRequest {}
+message GetAlbumRequest {
+}
 message GetAlbumResponse {
-  repeated Album album = 1;
+  repeated Album albums = 1;
 }
 
-service HelloWorld {
+service helloWorld {
   rpc CreateAlbum(CreateAlbumRequest) returns (CreateAlbumResponse) {}
   rpc GetAlbum(GetAlbumRequest) returns (GetAlbumResponse) {}
 }
