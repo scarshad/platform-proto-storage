@@ -24,7 +24,7 @@ message GetAlbumResponse {
   repeated Album albums = 1;
 }
 
-service helloWorld {
+service HelloWorld {
   rpc CreateAlbum(CreateAlbumRequest) returns (CreateAlbumResponse) {}
   rpc GetAlbum(GetAlbumRequest) returns (GetAlbumResponse) {}
 }
