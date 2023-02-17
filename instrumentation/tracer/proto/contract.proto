@@ -4,6 +4,10 @@ package tracer;
 
 option go_package = "../pb/go;tracer";
 
+enum testenum {
+  test_field = 0;
+}
+
 message Album {
   string id = 1;
   string title = 2;
