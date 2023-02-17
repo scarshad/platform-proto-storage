@@ -10,7 +10,7 @@ jobs:
 #        with:
 #          configDirectory: config
 
-      - uses: bufbuild/buf-setup-action@v1'
+      - uses: bufbuild/buf-setup-action@v1
 
       # Lint your Protobuf sources
       - uses: bufbuild/buf-lint-action@v1
