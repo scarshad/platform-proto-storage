@@ -1,10 +1,5 @@
 const grpc = require("grpc");
-//const protoLoader = require("@grpc/proto-loader")
-//const packageDef = protoLoader.loadSync("todo.proto", {});
-//const grpcObject = grpc.loadPackageDefinition(packageDef);
-//const todoPackage = grpcObject.todoPackage;
-
-const {todoPackage} = require("./protolib")
+const {todoPackage} = require("../nodejs-lib/protolib")
 
 const server = new grpc.Server();
 server.bind("0.0.0.0:40000",

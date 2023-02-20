@@ -1,10 +1,5 @@
 const grpc = require("grpc");
-//const protoLoader = require("@grpc/proto-loader")
-//const packageDef = protoLoader.loadSync("todo.proto", {});
-//const grpcObject = grpc.loadPackageDefinition(packageDef);
-//const todoPackage = grpcObject.todoPackage;
-
-const {todoPackage} = require("./protolib")
+const {todoPackage} = require("../nodejs-lib/protolib")
 
 const text = process.argv[2];
 
@@ -16,7 +11,6 @@ client.createTodo({
     "id": -1,
     "text": text
 }, (err, response) => {
-
     console.log("Recieved from server " + JSON.stringify(response))
 
 })
@@ -26,7 +20,6 @@ client.readTodos(null, (err, response) => {
     if (!response.items)
         response.items.forEach(a=>console.log(a.text));
 })
-
 
 const call = client.readTodosStream();
 call.on("data", item => {
