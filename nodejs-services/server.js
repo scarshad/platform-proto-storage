@@ -24,7 +24,6 @@ function createTodo (call, callback) {
 }
 
 function readTodosStream(call, callback) {
-
     todos.forEach(t => call.write(t));
     call.end();
 }

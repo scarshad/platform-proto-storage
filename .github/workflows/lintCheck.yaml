@@ -6,10 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         # will be removed
-      - name: run protolint
-        uses: plexsystems/protolint-action@v0.4.0
-        with:
-          configDirectory: config
+#      - name: run protolint
+#        uses: plexsystems/protolint-action@v0.4.0
+#        with:
+#          configDirectory: config
 
       - uses: bufbuild/buf-setup-action@v1
 
