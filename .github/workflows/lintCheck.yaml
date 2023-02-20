@@ -19,8 +19,16 @@ jobs:
         with:
           input: proto
       # Run breaking change detection against the `main` branch
-      - name: buf-breaking
-        uses: bufbuild/buf-breaking-action@v1
-        with:
-          against: 'https://github.com/scarshad/platform-proto-storage.git#branch=main'
+#      - name: buf-breaking
+#        uses: bufbuild/buf-breaking-action@v1
+#        with:
+#          against: 'https://github.com/scarshad/platform-proto-storage.git#branch=main'
 
+      # We need to fetch main so we can compare breaking changes against whatever is in main right now.
+      - name: Fetch origin/main
+        run: git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+
+      - uses: bufbuild/buf-breaking-action@v1
+        with:
+          input: 'proto'
+          against: '.git#branch=origin/main,subdir=proto'
