@@ -5,10 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#      - name: run protolint
-#        uses: plexsystems/protolint-action@v0.4.0
-#        with:
-#          configDirectory: config
+        # will be removed
+      - name: run protolint
+        uses: plexsystems/protolint-action@v0.4.0
+        with:
+          configDirectory: config
 
       - uses: bufbuild/buf-setup-action@v1
 
