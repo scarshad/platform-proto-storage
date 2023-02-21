@@ -17,7 +17,7 @@ jobs:
       - name: buf-lint
         uses: bufbuild/buf-lint-action@v1
         with:
-          input: proto
+          input: proto/*
       # Run breaking change detection against the `main` branch
 #      - name: buf-breaking
 #        uses: bufbuild/buf-breaking-action@v1
@@ -31,4 +31,4 @@ jobs:
       - uses: bufbuild/buf-breaking-action@v1
         with:
           input: 'proto'
-          against: '.git#branch=origin/main,subdir=proto'
+          against: 'https://github.com/scarshad/platform-proto-storage.git#branch=main,subdir=proto'
