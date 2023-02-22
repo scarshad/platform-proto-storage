@@ -9,11 +9,13 @@ jobs:
 
       # Lint your Protobuf sources
       - name: buf-lint
+        if: always()
         uses: bufbuild/buf-lint-action@v1
         with:
           input: proto
        # Run breaking change detection against the `main` branch
       - name: buf-breaking
+        if: always()
         uses: bufbuild/buf-breaking-action@v1
         with:
           against: 'https://github.com/scarshad/platform-proto-storage.git#branch=main'
