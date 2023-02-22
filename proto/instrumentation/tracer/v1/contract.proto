@@ -4,23 +4,31 @@ package tracer;
 
 option go_package = "../pb/go;tracer";
 
+enum TestEnum {
+  TEST_FIELd = 0;
+}
+
 message Album {
-  string id = 1;
   string title = 2;
   string artist = 3;
   float price = 4;
+  string extra = 5;
 }
 
 message CreateAlbumRequest {
   Album album = 1;
 }
 message CreateAlbumResponse {
-  Album Album = 1;
+  Album album = 1;
 }
 
-message GetAlbumRequest {}
+message GetAlbumRequest {
+}
 message GetAlbumResponse {
-  repeated Album album = 1;
+  repeated Album albums = 1;
+//  optional string name = 2;
+//  reserved 3, 9 to 10, 15;
+//  reserved "name";
 }
 
 service HelloWorld {

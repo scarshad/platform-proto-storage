@@ -1,5 +1,5 @@
 compile-tracer:
-	protoc -I ./instrumentation/tracer/proto \
-       --go_out ./instrumentation/tracer/pb --go_opt paths=source_relative \
-       --go-grpc_out ./instrumentation/tracer/pb --go-grpc_opt paths=source_relative \
-       ./instrumentation/tracer/proto/*.proto
+	protoc -I ./proto/instrumentation/tracer/v1 \
+       --go_out ./pb/instrumentation/tracer/v1 --go_opt paths=source_relative \
+       --go-grpc_out ./pb/instrumentation/tracer/v1 --go-grpc_opt paths=source_relative \
+       ./proto/instrumentation/tracer/v1/*.proto

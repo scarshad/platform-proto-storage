@@ -1,0 +1,21 @@
+name: "lint protobuf"
+on: [pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bufbuild/buf-setup-action@v1
+
+      # Lint your Protobuf sources
+      - name: buf-lint
+        if: always()
+        uses: bufbuild/buf-lint-action@v1
+        with:
+          input: proto
+       # Run breaking change detection against the `main` branch
+      - name: buf-breaking
+        if: always()
+        uses: bufbuild/buf-breaking-action@v1
+        with:
+          against: 'https://github.com/scarshad/platform-proto-storage.git#branch=main'
